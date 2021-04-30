@@ -456,15 +456,15 @@ namespace Oxide.Plugins
         /// <param name="id">Id for this coroutine</param>
         /// <param name="onComplete">Callback for when the task is completed</param>
         /// <returns>A <see cref="Coroutine" /> to run</returns>
-        [HookMethod("StartAsynchronousTask")]
-        public Coroutine StartAsynchronousTask(Plugin owner, Action task, float initialDelay = 0f, string id = null,
+        [HookMethod("GetDelayedTask")]
+        public Coroutine GetDelayedTask(Plugin owner, Action task, float initialDelay = 0f, string id = null,
             Action onComplete = null)
         {
             return CreateCoroutine(owner, GetInitialDelayCoroutine(initialDelay, task), id, onComplete);
         }
 
         /// <summary>
-        ///     The same as <see cref="StartAsynchronousTask" /> but it repeats
+        ///     The same as <see cref="StartDelayedTask" /> but it repeats
         /// </summary>
         /// <param name="owner">Owner</param>
         /// <param name="continuePredicate">Predicate to keep repeating</param>
@@ -473,8 +473,8 @@ namespace Oxide.Plugins
         /// <param name="id">Id of this coroutine</param>
         /// <param name="onComplete">Callback when <see cref="continuePredicate" /> returns false (task is complete)</param>
         /// <returns>A <see cref="Coroutine" /> to run</returns>
-        [HookMethod("StartAsynchronousRepeatingTask")]
-        public Coroutine StartAsynchronousRepeatingTask(Plugin owner, Func<bool> continuePredicate, float interval,
+        [HookMethod("GetAsynchronousRepeatingTask")]
+        public Coroutine GetAsynchronousRepeatingTask(Plugin owner, Func<bool> continuePredicate, float interval,
             float initialDelay = 0f, string id = null, Action onComplete = null)
         {
             return CreateCoroutine(owner, GetRepeatingCoroutine(
@@ -532,7 +532,7 @@ namespace Oxide.Plugins
             var index = startIndex == -1 ? reverse ? list.Count - 1 : 0 : startIndex;
             if (reverse && completePerTick > 0) completePerTick = -completePerTick;
             var increment = reverse ? -1 : 1;
-            return StartAsynchronousRepeatingTask(owner, () =>
+            return GetAsynchronousRepeatingTask(owner, () =>
             {
                 var max = index + completePerTick;
                 for (var i = index; reverse ? i >= 0 : i < max && i < list.Count; i += increment)
@@ -635,7 +635,7 @@ namespace Oxide.Plugins
         {
             var found = false;
             var index = 0;
-            return StartAsynchronousRepeatingTask(owner, () =>
+            return GetAsynchronousRepeatingTask(owner, () =>
             {
                 var max = index + completePerTick;
                 for (var i = index; i < max && i < getSize.Invoke(item); i++)

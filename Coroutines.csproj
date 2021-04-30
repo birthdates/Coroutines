@@ -7,7 +7,7 @@
         <UseWindowsForms>true</UseWindowsForms>
         <LangVersion>6</LangVersion>
     </PropertyGroup>
-    <ItemGroup>
+    <ItemGroup> 
         <Reference Include="Oxide.Core, Version=2.0.3991.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>libs\Oxide.Core.dll</HintPath>
         </Reference>
