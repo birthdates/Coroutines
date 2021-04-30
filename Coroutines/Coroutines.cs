@@ -91,7 +91,6 @@ namespace Oxide.Plugins
             /// </summary>
             public bool Stop { get; set; }
 
-
             /// <summary>
             ///     The callback for when this coroutine is complete
             /// </summary>
@@ -140,6 +139,7 @@ namespace Oxide.Plugins
                         "An exception occurred whilst executing coroutine from {0} {1} at stage {2}, level {3}:\n{4}\n{5}",
                         Owner.Name, GetIdOrEmpty(), CurrentStage, CurrentLevel,
                         exception.Message, exception.StackTrace);
+                    goto finish;
                 }
 
                 CurrentStage = 0;
