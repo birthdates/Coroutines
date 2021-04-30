@@ -321,6 +321,43 @@ private void OnServerInitialized()
 }
 ```
 
+### Giving players random items (Rust)
+```csharp
+private const string Id = "RandomItems";
+private const float Time = 60f;
+
+private void Start()
+{
+    Coroutines.Instance.GetAsynchronousRepeatingTask(this, () =>
+    {
+        GiveItems();
+        return true;
+    }, Time, Time, Id);
+}
+
+private void GiveItems()
+{
+    Coroutines.Instance.LoopListAsynchronously(this, player =>
+    {
+        if (player.IsDead() || player.IsWounded()) return;
+        var itemDef = ItemManager.itemList[Random.Range(ItemManager.itemList.Count)];
+        var itemAmount = itemDef.stackable > 1 ? Random.Range(itemDef.stackable) + 1 : 1;
+        var item = ItemManager.Create(itemDef, itemAmount);
+        if (itemDef.condition.enabled)
+        {
+            var max = itemDef.condition.max;
+            item.condition = Random.Range(max/10, max);
+        }
+        player.GiveItem(item);
+    }, BasePlayer.activePlayerList, 0.01f, completePerTick: 5, id: Id);
+}
+
+private bool Stop()
+{
+    return Coroutines.Instance.StopCoroutine(Id);
+}
+```
+
 ## FAQ
 
 ### Will this fix the lag on my server?
