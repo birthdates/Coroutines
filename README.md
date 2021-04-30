@@ -375,7 +375,7 @@ private Coroutine GiveItems()
             item.condition = Random.Range(max/10, max);
         }
         player.GiveItem(item);
-    }, BasePlayer.activePlayerList, 0.01f, completePerTick: 5, id: Id);
+    }, BasePlayer.activePlayerList, 0.01f, completePerTick: 5);
 }
 
 private bool Stop()
