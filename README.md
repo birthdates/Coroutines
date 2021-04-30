@@ -28,6 +28,10 @@ Here are some methods I've already implemented
 /// This is a hook
 bool StartCoroutine(Coroutine coroutine)
 
+```
+
+```csharp
+
 /// <summary>
 ///     Create a <see cref="Coroutine"/>
 /// </summary>
@@ -39,6 +43,10 @@ bool StartCoroutine(Coroutine coroutine)
 /// This is a hook
 Coroutine CreateCoroutine(Plugin owner, IEnumerator instructions, string id = null, Action onComplete = null)
 
+```
+
+```csharp
+
 /// <summary>
 ///     Stop a coroutine with a given id
 /// </summary>
@@ -47,12 +55,20 @@ Coroutine CreateCoroutine(Plugin owner, IEnumerator instructions, string id = nu
 /// This is a hook
 bool StopCoroutine(string id)
 
+```
+
+```csharp
+
 /// <summary>
 ///     Stop coroutines started by <see cref="owner"/>
 /// </summary>
 /// <param name="owner">Target plugin</param>
 /// This is a hook
 void StopCoroutines(Plugin owner)
+
+```
+
+```csharp
 
 /// <summary>
 ///     Start an asynchronous task that isn't repeated
@@ -65,6 +81,10 @@ void StopCoroutines(Plugin owner)
 /// <returns>A <see cref="Coroutine"/> to run</returns>
 /// This is a hook
 Coroutine StartAsynchronousTask(Plugin owner, Action task, float initialDelay = 0f, Action onComplete = null)
+
+```
+
+```csharp
 
 /// <summary>
 ///     The same as <see cref="StartAsynchronousTask" /> but it repeats
@@ -79,6 +99,10 @@ Coroutine StartAsynchronousTask(Plugin owner, Action task, float initialDelay = 
 /// This is a hook
 Coroutine StartAsynchronousRepeatingTask(Plugin owner, Func<bool> continuePredicate, float interval,
             float initialDelay = 0f, string id = null, Action onComplete = null)
+           
+```
+
+```csharp
 
 /// <summary>
 ///     Asynchronously loop through list (this loops through the whole list no stopping)
@@ -98,6 +122,10 @@ Coroutine StartAsynchronousRepeatingTask(Plugin owner, Func<bool> continuePredic
 Coroutine LoopListAsynchronously<T>(Plugin owner, Action<T> callback, IList<T> list,
             float interval, int startIndex = -1, bool reverse = false, int completePerTick = 1, float initialDelay = 0f,
             string id = null, Action onComplete = null)
+            
+```
+
+```csharp
 
 /// <summary>
 ///     Asynchronously loop through list
@@ -117,6 +145,10 @@ Coroutine LoopListAsynchronously<T>(Plugin owner, Action<T> callback, IList<T> l
 Coroutine LoopListAsynchronously<T>(Plugin owner, Func<T, bool> callback, IList<T> list,
             float interval, int startIndex = -1, bool reverse = false, int completePerTick = 1,
             float initialDelay = 0f, string id = null, Action onComplete = null)
+            
+```
+
+```csharp
 
 /// <summary>
 ///     Asynchronously search through a list (check if value is in list)
@@ -136,6 +168,10 @@ Coroutine LoopListAsynchronously<T>(Plugin owner, Func<T, bool> callback, IList<
 Coroutine SearchListAsynchronously<T>(Plugin owner, T target, Action<bool> callback, IList<T> list,
             float interval, int startIndex = -1, bool reverse = false, int completePerTick = 1, float initialDelay = 0f,
             string id = null)
+            
+```
+
+```csharp
 
 /// <summary>
 ///     Asynchronously find a value from it's corresponding key in a <see cref="IDictionary{TKey,TValue}" />
@@ -154,6 +190,7 @@ Coroutine SearchListAsynchronously<T>(Plugin owner, T target, Action<bool> callb
 Coroutine SearchDictionaryAsynchronously<TK, TV>(Plugin owner, TK target, Action<TV> callback,
             IDictionary<TK, TV> dictionary, float interval, int completePerTick = 1, float initialDelay = 0f,
             string id = null)
+            
 ```
 
 ### Errors/Warnings
