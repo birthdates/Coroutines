@@ -33,13 +33,13 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Oxide.Core, Version=2.0.3991.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\Desktop\Solo Whitelisted Server\RustDedicated_Data\Managed\Oxide.Core.dll</HintPath>
+          <HintPath>libs\Oxide.Core.dll</HintPath>
         </Reference>
         <Reference Include="Oxide.CSharp, Version=2.0.4041.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\Desktop\Solo Whitelisted Server\RustDedicated_Data\Managed\Oxide.CSharp.dll</HintPath>
+          <HintPath>libs\Oxide.CSharp.dll</HintPath>
         </Reference>
         <Reference Include="Oxide.References, Version=2.0.3779.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\Desktop\Solo Whitelisted Server\RustDedicated_Data\Managed\Oxide.References.dll</HintPath>
+          <HintPath>libs\Oxide.References.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
