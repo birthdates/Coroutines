@@ -9,7 +9,7 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("Coroutines", "birthdates", "3.0.6")]
+    [Info("Coroutines", "birthdates", "3.0.7")]
     [Description(
         "Allows other plugins to spread out large workloads over time to reduce lag spikes")]
     public class Coroutines : CovalencePlugin
