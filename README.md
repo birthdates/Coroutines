@@ -351,16 +351,19 @@ private const float Time = 60f;
 
 private void Start()
 {
-    Coroutines.Instance.GetAsynchronousRepeatingTask(this, () =>
-    {
-        GiveItems();
-        return true;
-    }, Time, Time, Id);
+    var coroutine = Coroutines.Instance.CreateCoroutine(this, Instructions(), Id);
+    Coroutines.Instance.StartCoroutine(coroutine);
 }
 
-private void GiveItems()
+private IEnumerator Instructions() {
+    yield return new WaitForSeconds(Time);
+    yield return GiveItems();
+    yield return Instructions();
+}
+
+private Coroutine GiveItems()
 {
-    Coroutines.Instance.LoopListAsynchronously(this, player =>
+    return Coroutines.Instance.LoopListAsynchronously(this, player =>
     {
         if (player.IsDead() || player.IsWounded()) return;
         var itemDef = ItemManager.itemList[Random.Range(ItemManager.itemList.Count)];
