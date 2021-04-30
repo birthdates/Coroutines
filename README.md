@@ -80,14 +80,14 @@ void StopCoroutines(Plugin owner)
 /// <param name="onComplete">Callback for when the task is completed</param>
 /// <returns>A <see cref="Coroutine"/> to run</returns>
 /// This is a hook
-Coroutine StartAsynchronousTask(Plugin owner, Action task, float initialDelay = 0f, Action onComplete = null)
+Coroutine GetDelayedTask(Plugin owner, Action task, float initialDelay = 0f, Action onComplete = null)
 
 ```
 
 ```csharp
 
 /// <summary>
-///     The same as <see cref="StartAsynchronousTask" /> but it repeats
+///     The same as <see cref="GetDelayedTask" /> but it repeats
 /// </summary>
 /// <param name="owner">Owner</param>
 /// <param name="continuePredicate">Predicate to keep repeating</param>
@@ -97,7 +97,7 @@ Coroutine StartAsynchronousTask(Plugin owner, Action task, float initialDelay = 
 /// <param name="onComplete">Callback when <see cref="continuePredicate" /> returns false (task is complete)</param>
 /// <returns>A <see cref="Coroutine"/> to run</returns>
 /// This is a hook
-Coroutine StartAsynchronousRepeatingTask(Plugin owner, Func<bool> continuePredicate, float interval,
+Coroutine GetAsynchronousRepeatingTask(Plugin owner, Func<bool> continuePredicate, float interval,
             float initialDelay = 0f, string id = null, Action onComplete = null)
            
 ```
