@@ -681,11 +681,13 @@ namespace Oxide.Plugins
                 callback(null);
                 return;
             }
+
             var found = false;
             LoopListAsynchronously(owner, player =>
                 {
                     if (!player.Id.Equals(data) && (!includeName || !player.Name.Equals(data,
-                        ignoreCase ? StringComparison.InvariantCultureIgnoreCase : StringComparison.Ordinal))) return false;
+                        ignoreCase ? StringComparison.InvariantCultureIgnoreCase : StringComparison.Ordinal)))
+                        return false;
                     callback(player as T);
                     found = true;
                     return true;

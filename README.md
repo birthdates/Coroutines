@@ -193,6 +193,29 @@ Coroutine SearchDictionaryAsynchronously<TK, TV>(Plugin owner, TK target, Action
             
 ```
 
+```csharp
+
+/// <summary>
+///     Find a player from the server asynchronously
+/// </summary>
+/// <param name="owner">Owner plugin</param>
+/// <param name="data">Data about the player (name/id)</param>
+/// <param name="callback">Callback with player or <see langword="null" /></param>
+/// <param name="includeName">Should we check for name?</param>
+/// <param name="ignoreCase">Should we check name ignore case?</param>
+/// <param name="interval">Interval between each repetition</param>
+/// <param name="completePerTick">How many loops to complete each tick</param>
+/// <param name="initialDelay">Any initial delay</param>
+/// <param name="reverse">Start in reverse?</param>
+/// <param name="startIndex">Start index</param>
+/// <param name="id">Id of this coroutine</param>
+/// <typeparam name="T"></typeparam>
+void FindPlayerAsynchronously<T>(Plugin owner, string data, Action<T> callback, bool includeName = true,
+            bool ignoreCase = false, float interval = 0.01f, int completePerTick = 15, float initialDelay = 0f,
+            bool reverse = false, int startIndex = -1, string id = null)
+
+```
+
 ### Errors/Warnings
 *All stages/levels are zero-based*
 
