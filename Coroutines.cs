@@ -9,7 +9,7 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("Coroutines", "birthdates", "3.0.7")]
+    [Info("Coroutines", "birthdates", "3.0.8")]
     [Description(
         "Allows other plugins to spread out large workloads over time to reduce lag spikes")]
     public class Coroutines : CovalencePlugin
@@ -701,6 +701,30 @@ namespace Oxide.Plugins
         }
 
         /// <summary>
+        ///     Get a <see cref="IEnumerable{T}"/> of coroutines with that id
+        /// </summary>
+        /// <param name="id">Target id</param>
+        /// <returns><see cref="IEnumerable{T}"/> of coroutines</returns>
+        private IEnumerable<Coroutine> GetCoroutinesById(string id)
+        {
+            return GetAllCoroutines()
+                .Select(coroutines =>
+                    coroutines.FirstOrDefault(coroutine => Equals(coroutine.Id, id)))
+                .DefaultIfEmpty();
+        }
+
+        /// <summary>
+        ///     Check if a coroutine is running
+        /// </summary>
+        /// <param name="id">Coroutine id</param>
+        /// <returns><see langword="true" /> if coroutine is running</returns>
+        public bool IsCoroutineRunning(string id)
+        {
+            var coroutine = GetCoroutinesById(id).FirstOrDefault();
+            return coroutine != null && !coroutine.Stop;
+        }
+        
+        /// <summary>
         ///     Stop a coroutine with a given id
         /// </summary>
         /// <param name="id">Given id</param>
@@ -708,10 +732,7 @@ namespace Oxide.Plugins
         [HookMethod("StopCoroutine")]
         public bool StopCoroutine(string id)
         {
-            return GetAllCoroutines()
-                .Select(coroutines =>
-                    coroutines.FirstOrDefault(coroutine => Equals(coroutine.Id, id)))
-                .DefaultIfEmpty()
+            return GetCoroutinesById(id)
                 .All(StopCoroutine);
         }
 
@@ -829,8 +850,7 @@ namespace Oxide.Plugins
             if (coroutine == null) return false; //just in case you don't check it
             if (!CanTakeCoroutine() || !CanTakeCoroutine(coroutine.Id, coroutine.CachedMaxInstances))
             {
-                _queuedCoroutines.AddLast(coroutine);
-                if (_queuedCoroutines.Count == 1) StartCheckingQueue();
+                if (_queuedCoroutines.AddLast(coroutine).Previous == null) StartCheckingQueue(); //if we're the first element
                 return false;
             }
 
