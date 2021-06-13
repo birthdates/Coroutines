@@ -386,6 +386,18 @@ private bool Stop()
 
 ## FAQ
 
+## How do coroutines work?
+Coroutines are a way for developers to spread out their workload in a timely based manner. For example, if you wanted to loop through all the players on the server, but there are so many and you are doing an expensive calculation, you might not want to do them at all once; rather, in an interval. A coroutine is a set of instructions that are executed synchronously. You can [create your own instructions](https://umod.org/plugins/coroutines#instructions) or use the ones provided. Each block of code is executed after an instruction.
+
+For example:
+```csharp
+yield return new WaitForSeconds(10f);
+PrintWarning("test");
+yield return new WaitForSeconds(5f);
+PrintWarning("test2");
+```
+If you start a coroutine with these instructions, it will print `test` in 10 seconds & `test2` in 15 seconds. In conclusion, each block of code is executed when an instruction is completed.
+
 ### Will this fix the lag on my server?
 No, this plugin doesn't simply fix the lag on your server. This plugin is meant for developers, to improve the performance of high cost code.
 
